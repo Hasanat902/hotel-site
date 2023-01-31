@@ -16,10 +16,17 @@ const RoomProvider = ({ children }) => {
   useEffect(() => {
     setTotal(Number(adults[0]) + Number(kids[0]));
   });
-  console.log(total);
+  
+  const handleClick = event => {
+    event.preventDefault();
+    
+    const newRooms = roomData.filter(room => total <= room.maxPerson);
+    setRooms(newRooms);
+  }
+
 
   return (
-    <RoomContext.Provider value={{rooms, adults, setAdults, kids, setKids}}>
+    <RoomContext.Provider value={{rooms, adults, setAdults, kids, setKids, handleClick}}>
       {children}
     </RoomContext.Provider>
   );
